@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <title>Online Shop</title>
+    </head>
+    <body>
+        <nav class="navbar m-5 bg-body-tertiary rounded border">
+            <div class="container-fluid">
+              <a class="navbar-brand btn btn-primary" role="button" href="product.html">Produkte</a>
+              <a class="navbar-brand btn btn-secondary" role="button" href="category.html">Kategorien</a>
+              <a class="navbar-brand" href="login.html">Login</a>
+            </div>
+        </nav>
+        <div class="container-sm position-absolute top-50 start-50 translate-middle bg-light rounded border p-4">
+            <div class="row gap-2">
+                <div class="col-7">
+                    <img src="./img/Placeholder_view_vector.svg.png" class="img-fluid" alt="image">
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+                <div class="col">
+                    <h2>Name</h2>
+                    <input type="text" class="form-control mb-5" id="formGroupExampleInput2" placeholder="Produktname">
+                    <h2>Kategorie</h2>
+                    <select class="form-select mb-5" aria-label="Default select example">
+                        <option selected>Kategorie1</option>
+                        <option value="1">Kategorie2</option>
+                        <option value="2">Kategorie3</option>
+                        <option value="3">Kategorie4</option>
+                      </select>
+                      <h2>Preis</h2>
+                      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Produktname">
+                </div>
+            </div>
+            <div class="d-flex flex-row mt-2 justify-content-end gap-5">
+                <a href="product.html" class="btn btn-danger" role="button">Loeschen</a>
+                <a href="product.html" class="btn btn-secondary" role="button">Abbrechen</a>
+                <a href="product.html" class="btn btn-primary" role="button">Uebernehmen</a>
+            </div>
+        </div>
+    </body>
+</html>
