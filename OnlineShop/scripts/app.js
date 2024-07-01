@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -11,7 +12,7 @@ const port = 3000;
 const secretKey = 'your_secret_key';
 
 app.use(bodyParser.json({ limit: '10mb' })); // Erhöhen Sie die Größenbeschränkung für das Hochladen von Bildern
-app.use(express.static('public'));
+app.use(express.static('..'));
 
 let db = new sqlite3.Database('./database.sqlite', (err) => {
   if (err) {
@@ -96,7 +97,7 @@ app.post('/reset-password', authenticateToken, (req, res) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes for categories (public)
-app.get('/categories', (req, res) => {
+app.get('/api/categories', (req, res) => {
   db.all("SELECT * FROM categories", (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -117,7 +118,7 @@ app.post('/categories', authenticateToken, authorizeAdmin, (req, res) => {
   });
 });
 
-app.get('/categories/:id', (req, res) => {
+app.get('/api/categories/:id', (req, res) => {
   const { id } = req.params;
   db.get("SELECT * FROM categories WHERE id = ?", [id], (err, row) => {
     if (err) {
@@ -140,7 +141,7 @@ app.put('/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
   });
 });
 
-app.delete('/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
+app.delete('api/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
   const { id } = req.params;
   db.run("DELETE FROM categories WHERE id = ?", [id], function (err) {
     if (err) {
@@ -152,7 +153,7 @@ app.delete('/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
 });
 
 // Routes for products (public)
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
   db.all("SELECT * FROM products", (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -173,7 +174,7 @@ app.post('/products', authenticateToken, authorizeAdmin, (req, res) => {
   });
 });
 
-app.get('/products/:id', (req, res) => {
+app.get('/api/products/:id', (req, res) => {
   const { id } = req.params;
   db.get("SELECT * FROM products WHERE id = ?", [id], (err, row) => {
     if (err) {
@@ -184,7 +185,7 @@ app.get('/products/:id', (req, res) => {
   });
 });
 
-app.put('/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
+app.put('/api/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
   const { id } = req.params;
   const { name, price, categoryId, image } = req.body;
   db.run("UPDATE products SET name = ?, price = ?, categoryId = ?, image = ? WHERE id = ?", [name, price, categoryId, image, id], function (err) {
@@ -196,7 +197,7 @@ app.put('/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
   });
 });
 
-app.delete('/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
+app.delete('/api/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
   const { id } = req.params;
   db.run("DELETE FROM products WHERE id = ?", [id], function (err) {
     if (err) {
@@ -210,3 +211,19 @@ app.delete('/products/:id', authenticateToken, authorizeAdmin, (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.get('/products', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
+app.get('/products/show/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'inspectproduct.html'))
+})
+
+app.get('/category', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'category.html'))
+})
+
+app.get('/category/edit/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'editcategory.html'))
+})
