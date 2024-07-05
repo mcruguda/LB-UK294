@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+            //Checks if the token does not have Admin role
             if(!isAdmin.ok) {
                 document.getElementById("add-product").classList.add("d-none");
                 fetch(`/api/products`)
