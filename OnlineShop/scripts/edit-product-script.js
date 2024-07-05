@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(product => {
             const productName = document.getElementById('product-name');
-            const productCategory = document.getElementById('product-category');
             const productPrice = document.getElementById('product-price');
             const productImage = document.getElementById('product-img');
             
@@ -12,7 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then(product => { 
                 productName.value = product.name;
-                //productCategory.innerText = product.name;
+                const productCategory = document.getElementById('product-category');
+                fetch(`/api/categories`)
+                .then(response => response.json())
+                .then(categories => {
+                    categories.forEach(category => {
+                        if(category.id == product.categoryId) {
+                            productCategory.innerHTML = `${productCategory.innerHTML}
+                                        <option selected value="${category.id}">${category.name}</option>  
+                                    `;
+                        } else {
+                            productCategory.innerHTML = `${productCategory.innerHTML}
+                                        <option value="${category.id}">${category.name}</option>  
+                                    `;
+                        }
+                    });
+                })
                 productPrice.value = product.price;
             });
         });
@@ -52,7 +66,7 @@ editBtn.addEventListener('click', async () => {
             body: JSON.stringify({
                 name: productName,
                 price: productPrice,
-                categoryId: 1,
+                categoryId: productCategory,
                 image: "abc123"
             })
         });

@@ -51,6 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
         login.classList.add("d-none");
         logout.classList.remove("d-none");
     }
+
+    const productCategory = document.getElementById('product-category');
+    fetch(`/api/categories`)
+    .then(response => response.json())
+    .then(categories => {
+        categories.forEach(category => {
+            productCategory.innerHTML = `${productCategory.innerHTML}
+                        <option value="${category.id}">${category.name}</option>  
+                    `;
+        });
+    })
 })
 const logout = document.getElementById("logout-btn");
 
