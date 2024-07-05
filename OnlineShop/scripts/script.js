@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                         <h5 class="card-title">${product.name}</h5>
                                         <p class="card-text">${product.price}.-</p>
                                         <p class="card-text">Kategorie: ${category.name}</p>
-                                        <a href="/products/edit/${product.id}" class="btn btn-primary stretched-link">Ansehen</a>
+                                        <a href="/products/edit/${product.id}" class="btn btn-primary stretched-link">Bearbeiten</a>
                                     </div>
                                 </div>    
                             `;
