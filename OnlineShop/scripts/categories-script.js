@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie --> used for getting specific cookie
     const token = document.cookie.split("; ")
         .find((row) => row.startsWith("access_token="))
         ?.split("=")[1]
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const logout = document.getElementById("logout-btn");
         // https://www.w3schools.com/howto/howto_js_add_class.asp -> to add a html class in js
         if(token) {
+            // Changes login to logout
             login.classList.add("d-none");
             logout.classList.remove("d-none")
 
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+            // Creates list with only Category names
             if(!isAdmin.ok) {
                 document.getElementById("add-category").classList.add("d-none");
                 fetch(`/api/categories`)
@@ -32,7 +35,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 `;
                     });
                 })
-            } else {
+            } 
+            // Creates list of Categories with Admin elements
+            else {
                 fetch(`/api/categories`)
                 .then(response => response.json())
                 .then(categories => {
@@ -59,7 +64,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     });
                 })
             }
-        } else {
+        } 
+        // Add's only Category name when no token
+        else {
             document.getElementById("add-category").classList.add("d-none");
                 fetch(`/api/categories`)
                 .then(response => response.json())
@@ -79,6 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function deleteCategory(id) {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie --> used for getting specific cookie
     const token = document.cookie.split("; ")
         .find((row) => row.startsWith("access_token="))
         ?.split("=")[1]
@@ -101,5 +109,6 @@ async function deleteCategory(id) {
 const logout = document.getElementById("logout-btn");
 
 logout.addEventListener('click', () => {
+    //https://stackoverflow.com/questions/10593013/delete-cookie-by-name --> Used for cookie deletion
     document.cookie = "access_token" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 })

@@ -41,6 +41,7 @@ createProductBtn.addEventListener('click', async () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie --> used for getting specific cookie
     const token = document.cookie.split("; ")
             .find((row) => row.startsWith("access_token="))
             ?.split("=")[1]
@@ -66,5 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const logout = document.getElementById("logout-btn");
 
 logout.addEventListener('click', () => {
+    //https://stackoverflow.com/questions/10593013/delete-cookie-by-name --> Used for cookie deletion
     document.cookie = "access_token" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 })

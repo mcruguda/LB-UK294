@@ -99,5 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 const logout = document.getElementById("logout-btn");
 
 logout.addEventListener('click', () => {
+    //https://stackoverflow.com/questions/10593013/delete-cookie-by-name --> Used for cookie deletion
     document.cookie = "access_token" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 })
