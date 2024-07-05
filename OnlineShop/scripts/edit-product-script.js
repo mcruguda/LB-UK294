@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const productPrice = document.getElementById('product-price');
             const productImage = document.getElementById('product-img');
             
-            fetch(`/categories/${product.categoryId}`)
+            fetch(`/api/products/${window.location.pathname.split("/")[3]}`)
                 .then(response => response.json())
-                .then(category => { 
-                productName.innerText = product.name;
-                productCategory.innerText = category.name;
-                productPrice.innerText = product.price;
+                .then(product => { 
+                productName.value = product.name;
+                //productCategory.innerText = product.name;
+                productPrice.value = product.price;
             });
         });
 });
@@ -29,10 +29,38 @@ deleteBtn.addEventListener("click",() => {
     })
 })
 
-editBtn.addEventListener("click",() => {
-    fetch(`/api/products/${window.location.pathname.split("/")[3]}`), {
-        method: "PUT"
-    }.then(() => {
-        window.location.href = "/products"
-    })
-})
+editBtn.addEventListener('click', async () => {
+    const productName = document.getElementById('product-name').value;
+    const productCategory = document.getElementById('product-category').value;
+    const productPrice = document.getElementById('product-price').value;
+    //const productImage = document.getElementById('product-img');
+
+    if(productName == "" || productCategory == "" || productPrice == "") {
+        alert("Alle felder muessen ausgefuellt sein!")
+    } else {
+        const token = document.cookie.split("; ")
+        .find((row) => row.startsWith("access_token="))
+        ?.split("=")[1]
+        const response = await fetch(`/api/products/${window.location.pathname.split("/")[3]}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: productName,
+                price: productPrice,
+                categoryId: 1,
+                image: "abc123"
+            })
+        });
+    
+        if (response.ok) {
+            window.location.href = '/products';
+        } else {
+            alert("Produkt verändert werden!")
+        }
+    }
+
+    
+});
