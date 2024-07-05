@@ -50,6 +50,11 @@ function authorizeAdmin(req, res, next) {
   next();
 }
 
+// Added API to check if user role is admin or not
+app.post('/api/isAdmin', authenticateToken, authorizeAdmin, (req, res) => {
+  res.json(req.user.role);
+});
+
 // Route zur Registrierung
 app.post('/api/register', (req, res) => {
   const { username, password, role = 'user' } = req.body;
@@ -141,7 +146,7 @@ app.put('/api/categories/:id', authenticateToken, authorizeAdmin, (req, res) => 
   });
 });
 
-app.delete('api/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
+app.delete('/api/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
   const { id } = req.params;
   db.run("DELETE FROM categories WHERE id = ?", [id], function (err) {
     if (err) {
