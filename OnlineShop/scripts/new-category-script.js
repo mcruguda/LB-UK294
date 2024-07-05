@@ -4,10 +4,7 @@ createCategoryBtn.addEventListener('click', async () => {
     const categoryName = document.getElementById("category-name").value;
 
     if(categoryName == "") {
-        //alert("Alle felder muessen ausgefuellt sein!")
-        document.getElementById("alert-container").innerHTML = `<div class="alert alert-danger" role="alert">
-            Alle felder muessen ausgefuellt sein!
-            </div>`;
+        alert("Alle felder muessen ausgefuellt sein!")
     } else {
         const token = document.cookie.split("; ")
         .find((row) => row.startsWith("access_token="))
