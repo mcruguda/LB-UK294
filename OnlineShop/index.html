@@ -12,7 +12,8 @@
             <div class="container-fluid">
               <a class="navbar-brand btn btn-primary" role="button" href="/products">Produkte</a>
               <a class="navbar-brand btn btn-secondary" role="button" href="/category">Kategorien</a>
-              <a class="navbar-brand" href="/login">Login</a>
+              <a class="navbar-brand" href="/login" id="login-btn">Login</a>
+              <a class="navbar-brand d-none" id="logout-btn" href="">Logout</a>
             </div>
         </nav>
         <h1 class="text-center mb-5">Produkte</h1>
@@ -21,7 +22,7 @@
         <div class="row gap-5 justify-content-center mb-5" id="products-container"></div>
 
         <div class="fixed-bottom d-flex justify-content-end p-2">
-            <a class="icon-link" href="newproduct.html">
+            <a class="icon-link" href="newproduct.html" id="add-product">
                 <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-plus fs-1" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                 </svg>
