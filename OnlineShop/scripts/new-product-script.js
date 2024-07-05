@@ -39,3 +39,21 @@ createProductBtn.addEventListener('click', async () => {
 
     
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const token = document.cookie.split("; ")
+            .find((row) => row.startsWith("access_token="))
+            ?.split("=")[1]
+    const login = document.getElementById("login-btn");
+    const logout = document.getElementById("logout-btn");
+    // https://www.w3schools.com/howto/howto_js_add_class.asp -> to add a html class in js
+    if(token) {
+        login.classList.add("d-none");
+        logout.classList.remove("d-none");
+    }
+})
+const logout = document.getElementById("logout-btn");
+
+logout.addEventListener('click', () => {
+    document.cookie = "access_token" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+})

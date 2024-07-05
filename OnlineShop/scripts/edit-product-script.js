@@ -16,18 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 productPrice.value = product.price;
             });
         });
+        const token = document.cookie.split("; ")
+        .find((row) => row.startsWith("access_token="))
+        ?.split("=")[1]
+        const login = document.getElementById("login-btn");
+        const logout = document.getElementById("logout-btn");
+        // https://www.w3schools.com/howto/howto_js_add_class.asp -> to add a html class in js
+        if(token) {
+            login.classList.add("d-none");
+            logout.classList.remove("d-none")
+        }
 });
 
 const editBtn = document.getElementById('product-edit');
 const deleteBtn = document.getElementById('product-del');
-
-deleteBtn.addEventListener("click",() => {
-    fetch(`/api/products/${window.location.pathname.split("/")[3]}`), {
-        method: "DELETE"
-    }.then(() => {
-        window.location.href = "/products"
-    })
-})
 
 editBtn.addEventListener('click', async () => {
     const productName = document.getElementById('product-name').value;
@@ -64,3 +66,31 @@ editBtn.addEventListener('click', async () => {
 
     
 });
+
+deleteBtn.addEventListener('click', async () => {
+    const token = document.cookie.split("; ")
+        .find((row) => row.startsWith("access_token="))
+        ?.split("=")[1]
+    const response = await fetch(`/api/products/${window.location.pathname.split("/")[3]}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (response.ok) {
+        alert("Produkt wurde gelöscht.")
+        window.location.href = '/products';
+    } else {
+        alert("Produkt konnte nicht gelöscht werden!")
+    }
+
+    
+});
+
+const logout = document.getElementById("logout-btn");
+
+logout.addEventListener('click', () => {
+    document.cookie = "access_token" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+})
