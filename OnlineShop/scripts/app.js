@@ -51,7 +51,7 @@ function authorizeAdmin(req, res, next) {
 }
 
 // Route zur Registrierung
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   const { username, password, role = 'user' } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
   db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", [username, hashedPassword, role], function (err) {
@@ -64,7 +64,7 @@ app.post('/register', (req, res) => {
 });
 
 // Route zur Anmeldung
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
     if (err) {
@@ -107,7 +107,7 @@ app.get('/api/categories', (req, res) => {
   });
 });
 
-app.post('/categories', authenticateToken, authorizeAdmin, (req, res) => {
+app.post('/api/categories', authenticateToken, authorizeAdmin, (req, res) => {
   const { name } = req.body;
   db.run("INSERT INTO categories (name) VALUES (?)", [name], function (err) {
     if (err) {
@@ -129,7 +129,7 @@ app.get('/api/categories/:id', (req, res) => {
   });
 });
 
-app.put('/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
+app.put('/api/categories/:id', authenticateToken, authorizeAdmin, (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
   db.run("UPDATE categories SET name = ? WHERE id = ?", [name, id], function (err) {
@@ -163,7 +163,7 @@ app.get('/api/products', (req, res) => {
   });
 });
 
-app.post('/products', authenticateToken, authorizeAdmin, (req, res) => {
+app.post('/api/products', authenticateToken, authorizeAdmin, (req, res) => {
   const { name, price, categoryId, image } = req.body;
   db.run("INSERT INTO products (name, price, categoryId, image) VALUES (?, ?, ?, ?)", [name, price, categoryId, image], function (err) {
     if (err) {
@@ -226,4 +226,24 @@ app.get('/category', (req, res) => {
 
 app.get('/category/edit/:id', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'editcategory.html'))
+})
+
+app.get('/products/edit/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'editproduct.html'))
+})
+
+app.get('/products/new', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'newproduct.html'))
+})
+
+app.get('/category/new', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'newcategory.html'))
+})
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'login.html'))
+})
+
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'register.html'))
 })
