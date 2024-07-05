@@ -9,9 +9,11 @@ createProductBtn.addEventListener('click', async () => {
     console.log(productName)
     console.log(productCategory)
     console.log(productPrice)
-
     if(productName == "" || productPrice == "" /*|| productImg == "" || productImg == null*/) {
-        alert("Alle felder muessen ausgefuellt sein!")
+        //alert("Alle felder muessen ausgefuellt sein!")
+        document.getElementById("alert-container").innerHTML = `<div class="alert alert-danger" role="alert">
+            Alle felder muessen ausgefuellt sein!
+            </div>`;
     } else {
         const token = document.cookie.split("; ")
         .find((row) => row.startsWith("access_token="))
