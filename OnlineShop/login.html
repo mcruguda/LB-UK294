@@ -10,6 +10,11 @@
 <body>
 
     <div class="container-sm position-absolute top-50 start-50 translate-middle bg-light rounded border p-5">
+      <a class="icon-link" href="/products">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-arrow-left fs-3" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+      </a>
         <h1 class="text-center">Anmelden</h1>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"><h2>Benutzername</h2></label>
@@ -17,7 +22,7 @@
           </div>
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"><h2>Passwort</h2></label>
-            <input type="text" class="form-control" id="password-value" placeholder="Musterpasswort123">
+            <input type="password" class="form-control" id="password-value" placeholder="Musterpasswort123">
           </div>
           <div class="d-grid gap-2 col-3 mx-auto p-0">
             <p class="text-center mt-0 text-danger" id="error-msg"></p>
