@@ -10,36 +10,37 @@
     <body>
         <nav class="navbar m-5 bg-body-tertiary rounded border">
             <div class="container-fluid">
-              <a class="navbar-brand btn btn-primary" role="button" href="product.html">Produkte</a>
-              <a class="navbar-brand btn btn-secondary" role="button" href="category.html">Kategorien</a>
-              <a class="navbar-brand" href="login.html">Login</a>
+              <a class="navbar-brand btn btn-primary" role="button" href="/products">Produkte</a>
+              <a class="navbar-brand btn btn-secondary" role="button" href="/category">Kategorien</a>
+              <a class="navbar-brand" href="/login">Login</a>
             </div>
         </nav>
         <div class="container-sm position-absolute top-50 start-50 translate-middle bg-light rounded border p-4">
             <div class="row gap-2">
                 <div class="col-7">
-                    <img src="./img/Placeholder_view_vector.svg.png" class="img-fluid" alt="image">
+                    <img src="/img/Placeholder_view_vector.svg.png" class="img-fluid" alt="image">
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <div class="col">
                     <h2>Name</h2>
-                    <input type="text" class="form-control mb-5" id="formGroupExampleInput2" placeholder="Produktname">
+                    <input type="text" class="form-control mb-5" id="product-name" placeholder="Produktname">
                     <h2>Kategorie</h2>
-                    <select class="form-select mb-5" aria-label="Default select example">
+                    <select id="product-category" class="form-select mb-5" aria-label="Default select example">
                         <option selected>Kategorie1</option>
                         <option value="1">Kategorie2</option>
                         <option value="2">Kategorie3</option>
                         <option value="3">Kategorie4</option>
                       </select>
                       <h2>Preis</h2>
-                      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Produktname">
+                      <input type="text" class="form-control" id="product-price" placeholder="Produktname">
                 </div>
             </div>
             <div class="d-flex flex-row mt-2 justify-content-end gap-5">
-                <a href="product.html" class="btn btn-danger" role="button" id="product-del">Loeschen</a>
-                <a href="product.html" class="btn btn-secondary" role="button">Abbrechen</a>
-                <a href="product.html" class="btn btn-primary" role="button" id="product-edit">Uebernehmen</a>
+                <a class="btn btn-danger" role="button" id="product-del">Loeschen</a>
+                <a href="/products" class="btn btn-secondary" role="button">Abbrechen</a>
+                <a class="btn btn-primary" role="button" id="product-edit">Uebernehmen</a>
             </div>
         </div>
+        <script src="/scripts/edit-product-script.js"></script>
     </body>
 </html>

@@ -10,9 +10,9 @@
     <body>
         <nav class="navbar m-5 bg-body-tertiary rounded border">
             <div class="container-fluid">
-              <a class="navbar-brand btn btn-secondary" role="button" href="product.html">Produkte</a>
-              <a class="navbar-brand btn btn-primary" role="button" href="category.html">Kategorien</a>
-              <a class="navbar-brand" href="login.html">Login</a>
+              <a class="navbar-brand btn btn-secondary" role="button" href="/products">Produkte</a>
+              <a class="navbar-brand btn btn-primary" role="button" href="/category">Kategorien</a>
+              <a class="navbar-brand" href="/login">Login</a>
             </div>
         </nav>
         <h1 class="text-center mb-5">Neue Kategorie</h1>
@@ -20,14 +20,15 @@
             <div class="row">
                 <div class="col-8">
                     <h2>Name</h2>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Kategoriename">
+                    <input type="text" class="form-control" id="category-name" placeholder="Kategoriename">
                 </div>
             </div>
 
             <div class="d-flex flex-row mt-5 justify-content-end gap-5">
-                <a href="category.html" class="btn btn-secondary" role="button">Abbrechen</a>
-                <a href="category.html" class="btn btn-primary" role="button">Erstellen</a>
+                <a href="/category" class="btn btn-secondary" role="button">Abbrechen</a>
+                <a class="btn btn-primary" role="button" id="newcategory-btn">Erstellen</a>
             </div>
         </div>
+        <script src="/scripts/new-category-script.js"></script>
     </body>
 </html>
